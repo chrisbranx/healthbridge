@@ -7,7 +7,7 @@ import {
   HiOutlineShieldCheck, HiOutlineClock, HiOutlineLocationMarker,
   HiOutlineStar, HiOutlineChevronRight, HiOutlineClipboardList,
   HiOutlineChartBar, HiOutlineVideoCamera, HiOutlineAcademicCap,
-  HiOutlineSparkles, HiOutlineSun, HiOutlineMoon, HiOutlineGlobe as HiOutlineGlobeIcon
+  HiOutlineSparkles, HiOutlineSun, HiOutlineMoon
 } from 'react-icons/hi';
 import Logo from '../components/Logo';
 import { DoctorIllustration, CHWIllustration, PatientGroupIllustration, TelemedicineIllustration, GlobeIllustration } from '../components/MedicalIllustrations';
@@ -178,7 +178,6 @@ export default function Landing() {
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
 
   const featuresRef = useRef<HTMLDivElement>(null);
-  const featuresInView = useInView(featuresRef, { once: true, margin: '-100px' });
 
   const lang = language;
 
@@ -341,26 +340,6 @@ export default function Landing() {
             transition={{ duration: 0.6 }}
             className="flex items-center space-x-2"
           >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setDarkMode(!darkMode)}
-              className="p-2 rounded-xl text-secondary-400 hover:bg-secondary-100 dark:hover:bg-secondary-700 transition-colors"
-              title={lang === 'fr' ? 'Mode sombre' : 'Dark mode'}
-            >
-              {darkMode ? <HiOutlineSun className="h-4 w-4" /> : <HiOutlineMoon className="h-4 w-4" />}
-            </motion.button>
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={toggleLanguage}
-              className="flex items-center space-x-1 px-2.5 py-1.5 rounded-xl bg-primary-50 dark:bg-primary-900/30 hover:bg-primary-100 dark:hover:bg-primary-900/50 transition-colors"
-            >
-              <HiOutlineGlobeIcon className="h-3.5 w-3.5 text-primary-600 dark:text-primary-400" />
-              <span className="text-[11px] font-bold text-primary-700 dark:text-primary-400 uppercase">{language}</span>
-            </motion.button>
-
             <Link
               to="/login"
               className="px-4 py-2 text-sm font-medium text-secondary-600 hover:text-primary-600 transition-colors relative group"
@@ -577,7 +556,8 @@ export default function Landing() {
           <motion.div
             variants={containerVariants}
             initial="hidden"
-            animate={featuresInView ? 'visible' : 'hidden'}
+            whileInView="visible"
+            viewport={{ once: true, margin: '-50px' }}
             className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4"
           >
             {/* Large bento card - USSD */}
@@ -1092,6 +1072,27 @@ export default function Landing() {
           </motion.div>
         </div>
       </section>
+
+      {/* ===== FLOATING CONTROLS (beside AI button) ===== */}
+      <div className="fixed bottom-36 lg:bottom-24 right-4 z-50 flex flex-col space-y-2">
+        <motion.button
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.92 }}
+          onClick={() => setDarkMode(!darkMode)}
+          className="h-11 w-11 rounded-xl bg-white dark:bg-secondary-800 text-secondary-500 dark:text-secondary-300 shadow-lg border border-gray-200 dark:border-secondary-700 flex items-center justify-center hover:shadow-xl transition-shadow"
+          title={lang === 'fr' ? 'Mode sombre' : 'Dark mode'}
+        >
+          {darkMode ? <HiOutlineSun className="h-5 w-5" /> : <HiOutlineMoon className="h-5 w-5" />}
+        </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.92 }}
+          onClick={toggleLanguage}
+          className="h-11 w-11 rounded-xl bg-white dark:bg-secondary-800 shadow-lg border border-gray-200 dark:border-secondary-700 flex items-center justify-center hover:shadow-xl transition-shadow"
+        >
+          <span className="text-xs font-bold text-primary-600 uppercase">{language}</span>
+        </motion.button>
+      </div>
 
       {/* ===== FOOTER ===== */}
       <footer className="relative z-10 border-t border-secondary-100 bg-secondary-50/80 backdrop-blur-md">
