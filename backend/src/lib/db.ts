@@ -1,20 +1,8 @@
 import { supabase } from './supabase';
 import { devDb } from './devDb';
 
-export function isSupabaseConfigured() {
-  const url = process.env.SUPABASE_URL || '';
-  const key = process.env.SUPABASE_SERVICE_KEY || '';
-  return url.length > 10 && key.length > 10
-    && !url.includes('your-project')
-    && !key.includes('your-');
-}
-
 function getDb() {
-  return isSupabaseConfigured() ? supabase : null;
-}
-
-function isDev() {
-  return !isSupabaseConfigured();
+  return supabase;
 }
 
 export async function select(table: string, options?: { eq?: [string, any]; order?: [string, boolean]; limit?: number }) {

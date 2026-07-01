@@ -60,7 +60,7 @@ export const devDb = {
     return {
       data: data[table],
       async insert(item: any) {
-        const record = { id: item.id || require('crypto').randomUUID(), ...item, created_at: new Date().toISOString(), updated_at: new Date().toISOString() };
+        const record = { id: item.id || crypto.randomUUID(), ...item, created_at: new Date().toISOString(), updated_at: new Date().toISOString() };
         const d = getData();
         (d[table] as any[]).push(record);
         saveData(d);
@@ -80,7 +80,7 @@ export const devDb = {
   },
 
   insert: (table: keyof DevDatabase, item: any) => {
-    const id = item.id || require('crypto').randomUUID();
+    const id = item.id || crypto.randomUUID();
     const record = { ...item, id, created_at: new Date().toISOString(), updated_at: new Date().toISOString() };
     const data = getData();
     (data[table] as any[]).push(record);

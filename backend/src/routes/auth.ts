@@ -25,8 +25,7 @@ const loginSchema = z.object({
 });
 
 function getDb() {
-  const isSupabaseConfigured = process.env.SUPABASE_URL && process.env.SUPABASE_URL !== 'https://your-project.supabase.co';
-  return isSupabaseConfigured ? supabase : null;
+  return supabase;
 }
 
 async function findUserByPhone(phone: string) {

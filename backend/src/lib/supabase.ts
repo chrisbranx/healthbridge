@@ -7,9 +7,19 @@ const supabaseUrl = process.env.SUPABASE_URL || '';
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY || '';
 const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || '';
 
-export const supabase = createClient(supabaseUrl, supabaseServiceKey);
+function isSupabaseConfigured() {
+  return supabaseUrl.length > 10 && supabaseServiceKey.length > 10
+    && !supabaseUrl.includes('your-project')
+    && !supabaseServiceKey.includes('your-');
+}
 
-export const supabaseAnon = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = isSupabaseConfigured()
+  ? createClient(supabaseUrl, supabaseServiceKey)
+  : null;
+
+export const supabaseAnon = supabaseUrl && supabaseAnonKey
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null;
 
 export type Database = {
   public: {

@@ -33,7 +33,9 @@ const app = express();
 const server = createServer(app);
 const PORT = process.env.PORT || 3001;
 
-initSocketIO(server);
+if (process.env.VERCEL !== '1') {
+  initSocketIO(server);
+}
 
 app.use(helmet());
 app.use(cors({ origin: process.env.CORS_ORIGIN?.split(',') || '*' }));
