@@ -1,0 +1,126 @@
+{
+  "users": [
+    {
+      "phone": "+237690999999",
+      "password_hash": "$2a$12$DSB4e.q3Q0q8Hyk9giMVTuhrx7xSYB3.E0U/1x83HLjuMM18Xc5OC",
+      "name": "Test Patient",
+      "role": "patient",
+      "email": null,
+      "language": "en",
+      "region": "Centre",
+      "phone_verified": true,
+      "is_active": true,
+      "id": "626ab77d-31e2-4a45-84bb-15252e42c3d2",
+      "created_at": "2026-06-29T09:56:13.332Z",
+      "updated_at": "2026-06-29T09:56:13.332Z"
+    },
+    {
+      "phone": "+237688104091",
+      "password_hash": "$2a$12$wz77fkGqGbcy8o5hkVR1Nuxqk3hrho0iq9ggLp95HrkLnsmLoFyGO",
+      "name": "Chris Brandon",
+      "role": "patient",
+      "email": null,
+      "language": "en",
+      "region": "Northwest",
+      "phone_verified": true,
+      "is_active": true,
+      "id": "d243b678-5f2c-4610-bf30-0d96f0ab633b",
+      "created_at": "2026-06-30T23:46:50.147Z",
+      "updated_at": "2026-06-30T23:46:50.147Z"
+    }
+  ],
+  "patients": [
+    {
+      "user_id": "626ab77d-31e2-4a45-84bb-15252e42c3d2",
+      "name": "Test Patient",
+      "phone": "+237690999999",
+      "region": "Centre",
+      "id": "17295e6d-33ea-4222-a72a-58cb6648bff0",
+      "created_at": "2026-06-29T09:56:13.374Z",
+      "updated_at": "2026-06-29T09:56:13.374Z"
+    },
+    {
+      "user_id": "d243b678-5f2c-4610-bf30-0d96f0ab633b",
+      "name": "Chris Brandon",
+      "phone": "+237688104091",
+      "region": "Northwest",
+      "id": "1faade76-99b6-4f0c-947a-35e43db4018e",
+      "created_at": "2026-06-30T23:46:50.163Z",
+      "updated_at": "2026-06-30T23:46:50.163Z"
+    }
+  ],
+  "consultations": [],
+  "prescriptions": [],
+  "medication_adherence": [],
+  "chw_patient_assignments": [],
+  "chw_tasks": [],
+  "escalation_alerts": [],
+  "ussd_sessions": [],
+  "sms_log": [],
+  "clinics": [
+    {
+      "id": "clinic-1",
+      "name": "Yaounde Central Hospital",
+      "region": "Centre",
+      "district": "Yaounde",
+      "phone": "+237690000001",
+      "is_active": true
+    },
+    {
+      "id": "clinic-2",
+      "name": "Douala General Hospital",
+      "region": "Littoral",
+      "district": "Douala",
+      "phone": "+237690000002",
+      "is_active": true
+    },
+    {
+      "id": "clinic-3",
+      "name": "Garoua Regional Hospital",
+      "region": "North",
+      "district": "Garoua",
+      "phone": "+237690000003",
+      "is_active": true
+    },
+    {
+      "id": "clinic-4",
+      "name": "Maroua District Hospital",
+      "region": "Far North",
+      "district": "Maroua",
+      "phone": "+237690000004",
+      "is_active": true
+    },
+    {
+      "id": "clinic-5",
+      "name": "Ngaoundere Protestant Hospital",
+      "region": "Adamawa",
+      "district": "Ngaoundere",
+      "phone": "+237690000005",
+      "is_active": true
+    }
+  ],
+  "analytics_events": [
+    {
+      "event_type": "user_registered",
+      "entity_type": "user",
+      "entity_id": "626ab77d-31e2-4a45-84bb-15252e42c3d2",
+      "metadata": {
+        "role": "patient"
+      },
+      "id": "bc06fc30-f2ed-462b-aa41-a85b39981b89",
+      "created_at": "2026-06-29T09:56:13.396Z",
+      "updated_at": "2026-06-29T09:56:13.400Z"
+    },
+    {
+      "event_type": "user_registered",
+      "entity_type": "user",
+      "entity_id": "d243b678-5f2c-4610-bf30-0d96f0ab633b",
+      "metadata": {
+        "role": "patient"
+      },
+      "id": "bfb1c36b-fea1-41bf-8b43-bfb26fa2d543",
+      "created_at": "2026-06-30T23:46:50.167Z",
+      "updated_at": "2026-06-30T23:46:50.167Z"
+    }
+  ]
+}

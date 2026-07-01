@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 90" fill="none">
+  <defs>
+    <linearGradient id="faviGrad" x1="0" y1="0" x2="110" y2="90">
+      <stop offset="0%" stop-color="#0a5c8a" />
+      <stop offset="100%" stop-color="#0ea5a7" />
+    </linearGradient>
+  </defs>
+  <circle cx="55" cy="45" r="38" stroke="#0ea5a7" stroke-width="3" fill="none" opacity="0.6"/>
+  <path d="M 50 15 L 50 40 L 25 40 L 25 50 L 50 50 L 50 75 L 60 75 L 60 50 L 85 50 L 85 40 L 60 40 L 60 15 Z" fill="url(#faviGrad)"/>
+</svg>

@@ -1,0 +1,20 @@
+{
+  "name": "healthbridge",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HealthBridge - Rural Healthcare Ecosystem for Cameroon",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:web\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:web": "cd web && npm run dev",
+    "dev:chw": "cd chw-app && npm run dev",
+    "build": "npm run build:backend && npm run build:web && npm run build:chw",
+    "build:backend": "cd backend && npm run build",
+    "build:web": "cd web && npm run build",
+    "build:chw": "cd chw-app && npm run build",
+    "install:all": "npm install && cd backend && npm install && cd ../web && npm install && cd ../chw-app && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
