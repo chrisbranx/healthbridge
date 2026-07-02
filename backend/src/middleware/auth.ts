@@ -31,14 +31,15 @@ export const authenticate = async (
     const token = authHeader.split(' ')[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET || 'secret') as JwtPayload;
 
-    const { data: user } = await supabase
-      .from('users')
-      .select('id, role, is_active')
-      .eq('id', decoded.userId)
-      .single();
-
-    if (!user || !user.is_active) {
-      throw new AppError('User not found or inactive', 401);
+    if (supabase) {
+      const { data: user } = await supabase
+        .from('users')
+        .select('id, role, is_active')
+        .eq('id', decoded.userId)
+        .single();
+      if (!user || !user.is_active) {
+        throw new AppError('User not found or inactive', 401);
+      }
     }
 
     req.user = decoded;

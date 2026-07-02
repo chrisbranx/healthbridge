@@ -25,6 +25,9 @@ const roleConfig: Record<string, {
       { label: 'Dashboard', path: '/patient/dashboard', icon: HiOutlineHome },
       { label: 'Consult', path: '/patient/consultation', icon: HiOutlineChatAlt2 },
       { label: 'History', path: '/patient/history', icon: HiOutlineCalendar },
+      { label: 'Forum', path: '/patient/forum', icon: HiOutlineChatAlt2 },
+      { label: 'Family', path: '/patient/family', icon: HiOutlineUsers },
+      { label: 'Lab Results', path: '/patient/lab-results', icon: HiOutlineClipboardList },
     ],
   },
   doctor: {
@@ -40,6 +43,8 @@ const roleConfig: Record<string, {
       { label: 'Inventory', path: '/doctor/inventory', icon: HiOutlineOfficeBuilding },
       { label: 'Health Alerts', path: '/doctor/alerts', icon: HiOutlineExclamationCircle },
       { label: 'CHW Scores', path: '/doctor/chw-performance', icon: HiOutlineChartBar },
+      { label: 'Delivery', path: '/doctor/delivery', icon: HiOutlineClipboardList },
+      { label: 'Epidemic Map', path: '/doctor/epidemic', icon: HiOutlineGlobe },
     ],
   },
   chw: {
@@ -49,6 +54,7 @@ const roleConfig: Record<string, {
       { label: 'Patients', path: '/chw/patients', icon: HiOutlineUserGroup },
       { label: 'Tasks', path: '/chw/tasks', icon: HiOutlineClipboardList },
       { label: 'Alerts', path: '/chw/escalations', icon: HiOutlineExclamationCircle },
+      { label: 'Route Planner', path: '/chw/route-planner', icon: HiOutlineClipboardList },
     ],
   },
   admin: {

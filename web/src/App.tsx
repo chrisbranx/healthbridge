@@ -23,10 +23,19 @@ import DoctorHealthAlerts from './pages/doctor/HealthAlerts';
 import DoctorMedicationReminders from './pages/doctor/MedicationReminders';
 import DoctorChwPerformance from './pages/doctor/ChwPerformance';
 import DoctorVideoRooms from './pages/doctor/VideoRooms';
+import DoctorDelivery from './pages/doctor/Delivery';
+import DoctorEpidemicMap from './pages/doctor/EpidemicMap';
 import CHWDashboard from './pages/chw/Dashboard';
 import CHWPatients from './pages/chw/Patients';
 import CHWTasks from './pages/chw/Tasks';
 import CHWEscalations from './pages/chw/Escalations';
+import CHWRoutePlanner from './pages/chw/RoutePlanner';
+import EmergencySOS from './pages/EmergencySOS';
+import Forum from './pages/patient/Forum';
+import ForumThread from './pages/patient/ForumThread';
+import Family from './pages/patient/Family';
+import LabResults from './pages/patient/LabResults';
+import BloodDonor from './pages/BloodDonor';
 import AdminDashboard from './pages/admin/Dashboard';
 import AdminUsers from './pages/admin/Users';
 import AdminClinics from './pages/admin/Clinics';
@@ -85,6 +94,10 @@ function AppRoutes() {
         <Route path="/patient/consultation" element={<ProtectedRoute allowedRoles={['patient']}><Layout><PatientConsultation /></Layout></ProtectedRoute>} />
         <Route path="/patient/history" element={<ProtectedRoute allowedRoles={['patient']}><Layout><PatientHistory /></Layout></ProtectedRoute>} />
         <Route path="/patient/profile" element={<ProtectedRoute allowedRoles={['patient']}><Layout><PatientProfile /></Layout></ProtectedRoute>} />
+        <Route path="/patient/forum" element={<ProtectedRoute allowedRoles={['patient']}><Layout><Forum /></Layout></ProtectedRoute>} />
+        <Route path="/patient/forum/:id" element={<ProtectedRoute allowedRoles={['patient']}><Layout><ForumThread /></Layout></ProtectedRoute>} />
+        <Route path="/patient/family" element={<ProtectedRoute allowedRoles={['patient']}><Layout><Family /></Layout></ProtectedRoute>} />
+        <Route path="/patient/lab-results" element={<ProtectedRoute allowedRoles={['patient']}><Layout><LabResults /></Layout></ProtectedRoute>} />
         <Route path="/patient/help" element={<ProtectedRoute allowedRoles={['patient']}><Layout><HelpSupport /></Layout></ProtectedRoute>} />
         <Route path="/patient/settings" element={<ProtectedRoute allowedRoles={['patient']}><Layout><SettingsPage /></Layout></ProtectedRoute>} />
 
@@ -97,6 +110,8 @@ function AppRoutes() {
         <Route path="/doctor/inventory" element={<ProtectedRoute allowedRoles={['doctor']}><Layout><DoctorInventory /></Layout></ProtectedRoute>} />
         <Route path="/doctor/alerts" element={<ProtectedRoute allowedRoles={['doctor']}><Layout><DoctorHealthAlerts /></Layout></ProtectedRoute>} />
         <Route path="/doctor/video" element={<ProtectedRoute allowedRoles={['doctor']}><Layout><DoctorVideoRooms /></Layout></ProtectedRoute>} />
+        <Route path="/doctor/delivery" element={<ProtectedRoute allowedRoles={['doctor']}><Layout><DoctorDelivery /></Layout></ProtectedRoute>} />
+        <Route path="/doctor/epidemic" element={<ProtectedRoute allowedRoles={['doctor']}><Layout><DoctorEpidemicMap /></Layout></ProtectedRoute>} />
         <Route path="/doctor/chw-performance" element={<ProtectedRoute allowedRoles={['doctor']}><Layout><DoctorChwPerformance /></Layout></ProtectedRoute>} />
         <Route path="/doctor/patient/:id" element={<ProtectedRoute allowedRoles={['doctor']}><Layout><DoctorPatientTimeline /></Layout></ProtectedRoute>} />
         <Route path="/doctor/help" element={<ProtectedRoute allowedRoles={['doctor']}><Layout><HelpSupport /></Layout></ProtectedRoute>} />
@@ -106,6 +121,7 @@ function AppRoutes() {
         <Route path="/chw/patients" element={<ProtectedRoute allowedRoles={['chw']}><Layout><CHWPatients /></Layout></ProtectedRoute>} />
         <Route path="/chw/tasks" element={<ProtectedRoute allowedRoles={['chw']}><Layout><CHWTasks /></Layout></ProtectedRoute>} />
         <Route path="/chw/escalations" element={<ProtectedRoute allowedRoles={['chw']}><Layout><CHWEscalations /></Layout></ProtectedRoute>} />
+        <Route path="/chw/route-planner" element={<ProtectedRoute allowedRoles={['chw']}><Layout><CHWRoutePlanner /></Layout></ProtectedRoute>} />
         <Route path="/chw/help" element={<ProtectedRoute allowedRoles={['chw']}><Layout><HelpSupport /></Layout></ProtectedRoute>} />
         <Route path="/chw/settings" element={<ProtectedRoute allowedRoles={['chw']}><Layout><SettingsPage /></Layout></ProtectedRoute>} />
 
@@ -116,7 +132,14 @@ function AppRoutes() {
         <Route path="/admin/help" element={<ProtectedRoute allowedRoles={['admin']}><Layout><HelpSupport /></Layout></ProtectedRoute>} />
         <Route path="/admin/settings" element={<ProtectedRoute allowedRoles={['admin']}><Layout><SettingsPage /></Layout></ProtectedRoute>} />
 
-          <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="/sos" element={<ProtectedRoute><EmergencySOS /></ProtectedRoute>} />
+        <Route path="/forum" element={<ProtectedRoute><Layout><Forum /></Layout></ProtectedRoute>} />
+        <Route path="/forum/:id" element={<ProtectedRoute><Layout><ForumThread /></Layout></ProtectedRoute>} />
+        <Route path="/family" element={<ProtectedRoute><Layout><Family /></Layout></ProtectedRoute>} />
+        <Route path="/lab-results" element={<ProtectedRoute><Layout><LabResults /></Layout></ProtectedRoute>} />
+        <Route path="/blood-donor" element={<ProtectedRoute><Layout><BloodDonor /></Layout></ProtectedRoute>} />
+
+        <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
     </SocketProvider>
   );

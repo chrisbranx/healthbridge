@@ -25,6 +25,14 @@ import { healthAlertsRouter } from './routes/healthAlerts';
 import { insuranceRouter } from './routes/insurance';
 import { voiceRouter } from './routes/voice';
 import { chwPerformanceRouter } from './routes/chwPerformance';
+import { sosRouter } from './routes/sos';
+import { forumRouter } from './routes/forum';
+import { familyRouter } from './routes/family';
+import { labResultsRouter } from './routes/labResults';
+import { bloodDonorRouter } from './routes/bloodDonor';
+import { deliveryRouter } from './routes/delivery';
+import { epidemicRouter } from './routes/epidemic';
+import { voiceTriageRouter } from './routes/voiceTriage';
 import { initSocketIO } from './services/socket';
 
 dotenv.config();
@@ -66,6 +74,14 @@ app.use('/api/alerts', healthAlertsRouter);
 app.use('/api/insurance', insuranceRouter);
 app.use('/api/voice', voiceRouter);
 app.use('/api/chw-performance', chwPerformanceRouter);
+app.use('/api/sos', sosRouter);
+app.use('/api/forum', forumRouter);
+app.use('/api/family', familyRouter);
+app.use('/api/lab-results', labResultsRouter);
+app.use('/api/blood-donors', bloodDonorRouter);
+app.use('/api/delivery', deliveryRouter);
+app.use('/api/epidemic', epidemicRouter);
+app.use('/api/voice-triage', voiceTriageRouter);
 
 app.use(errorHandler);
 

@@ -3,7 +3,8 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { api } from '../../services/api';
 import toast from 'react-hot-toast';
-import { HiOutlineCube, HiOutlineExclamation, HiOutlinePlus, HiOutlineSearch } from 'react-icons/hi';
+import { HiOutlineCube, HiOutlineExclamation, HiOutlinePlus, HiOutlineSearch, HiOutlineCamera } from 'react-icons/hi';
+import BarcodeScanner from '../../components/BarcodeScanner';
 
 interface InventoryItem {
   id: string;
@@ -20,6 +21,7 @@ export default function Inventory() {
   const [items, setItems] = useState<InventoryItem[]>([]);
   const [search, setSearch] = useState('');
   const [showAdd, setShowAdd] = useState(false);
+  const [showScanner, setShowScanner] = useState(false);
   const [filterLow, setFilterLow] = useState(false);
   const [newItem, setNewItem] = useState({ medication_name: '', category: 'medication', quantity: 0, unit: 'tablets', reorder_level: 10 });
 
@@ -56,7 +58,10 @@ export default function Inventory() {
             {language === 'fr' ? 'Suivre les médicaments et fournitures' : 'Track medications and supplies'}
           </p>
         </div>
-        <button onClick={() => setShowAdd(true)} className="btn-primary"><HiOutlinePlus className="h-5 w-5 mr-1" /> {language === 'fr' ? 'Ajouter' : 'Add'}</button>
+        <div className="flex space-x-2">
+          <button onClick={() => setShowScanner(true)} className="btn-secondary"><HiOutlineCamera className="h-5 w-5" /></button>
+          <button onClick={() => setShowAdd(true)} className="btn-primary"><HiOutlinePlus className="h-5 w-5 mr-1" /> {language === 'fr' ? 'Ajouter' : 'Add'}</button>
+        </div>
       </motion.div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -171,6 +176,17 @@ export default function Inventory() {
             </form>
           </div>
         </motion.div>
+      )}
+      {showScanner && (
+        <BarcodeScanner
+          onScan={(code) => {
+            setNewItem({ ...newItem, medication_name: code });
+            setShowScanner(false);
+            setShowAdd(true);
+            toast.success(`Scanned: ${code}`);
+          }}
+          onClose={() => setShowScanner(false)}
+        />
       )}
     </div>
   );
