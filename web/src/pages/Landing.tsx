@@ -7,7 +7,10 @@ import {
   HiOutlineShieldCheck, HiOutlineClock, HiOutlineLocationMarker,
   HiOutlineStar, HiOutlineChevronRight, HiOutlineClipboardList,
   HiOutlineChartBar, HiOutlineVideoCamera, HiOutlineAcademicCap,
-  HiOutlineSparkles, HiOutlineSun, HiOutlineMoon
+  HiOutlineSparkles, HiOutlineSun, HiOutlineMoon,
+  HiOutlineExclamationCircle, HiOutlineChatAlt2, HiOutlineUsers,
+  HiOutlineOfficeBuilding, HiOutlineCalendar, HiOutlineMicrophone,
+  HiOutlineCamera, HiOutlineCloud
 } from 'react-icons/hi';
 import Logo from '../components/Logo';
 import { DoctorIllustration, CHWIllustration, PatientGroupIllustration, TelemedicineIllustration, GlobeIllustration } from '../components/MedicalIllustrations';
@@ -207,53 +210,113 @@ export default function Landing() {
     {
       icon: HiOutlinePhone, size: 'large',
       title: lang === 'fr' ? 'Consultation USSD' : 'USSD Consultation',
-      desc: lang === 'fr' ? 'Composez le *800# depuis n\'importe quel téléphone. Pas d\'internet requis.' : 'Dial *800# from any phone. No internet required.',
+      desc: lang === 'fr' ? 'Composez le *800# depuis n\'importe quel téléphone. Pas d\'internet ni smartphone requis. Service disponible 24h/24, 7j/7 dans tout le Cameroun.' : 'Dial *800# from any phone. No internet or smartphone required. Service available 24/7 across all Cameroon.',
       gradient: 'from-primary-500 to-accent-500',
       illustration: 'phone',
     },
     {
       icon: HiOutlineGlobe, size: 'medium',
       title: lang === 'fr' ? 'Télémédecine Web' : 'Web Telemedicine',
-      desc: lang === 'fr' ? 'Consultations vidéo avec des médecins qualifiés depuis votre navigateur.' : 'Video consultations with qualified doctors from your browser.',
+      desc: lang === 'fr' ? 'Consultations vidéo avec des médecins qualifiés depuis votre navigateur. Planification en ligne, rappels automatiques et suivi numérique.' : 'Video consultations with qualified doctors from your browser. Online scheduling, automatic reminders, and digital follow-up.',
       gradient: 'from-primary-600 to-primary-500',
       illustration: 'globe',
     },
     {
       icon: HiOutlineUserGroup, size: 'medium',
       title: lang === 'fr' ? 'Suivi ASC' : 'CHW Follow-up',
-      desc: lang === 'fr' ? 'Visites à domicile et suivi médicamenteux par des agents de santé communautaires.' : 'Home visits and medication tracking by community health workers.',
+      desc: lang === 'fr' ? 'Visites à domicile par des agents de santé communautaires. Suivi médicamenteux, observance thérapeutique, éducation sanitaire et escalade des cas urgents.' : 'Home visits by CHWs. Medication tracking, adherence monitoring, health education, and urgent case escalation.',
       gradient: 'from-accent-500 to-primary-600',
       illustration: 'chw',
     },
     {
       icon: HiOutlineVideoCamera, size: 'small',
       title: lang === 'fr' ? 'Téléconsultation' : 'Teleconsultation',
-      desc: lang === 'fr' ? 'Consultations vidéo en direct avec des médecins.' : 'Live video consultations with doctors.',
+      desc: lang === 'fr' ? 'Consultations vidéo en direct. Partage d\'écran, prescription numérique, et suivi post-consultation.' : 'Live video consultations. Screen sharing, digital prescriptions, and post-consultation follow-up.',
       gradient: 'from-primary-700 to-primary-500',
     },
     {
       icon: HiOutlineClock, size: 'small',
       title: lang === 'fr' ? 'Rendez-vous' : 'Appointments',
-      desc: lang === 'fr' ? 'Planifiez avec rappels automatiques.' : 'Schedule with automatic reminders.',
+      desc: lang === 'fr' ? 'Planification intelligente avec rappels SMS/WhatsApp. Créneaux horaires, confirmation automatique, et détection des absences.' : 'Smart scheduling with SMS/WhatsApp reminders. Time slots, auto-confirmation, and no-show detection.',
       gradient: 'from-primary-700 to-accent-600',
     },
     {
       icon: HiOutlineClipboardList, size: 'small',
       title: lang === 'fr' ? 'Dossiers médicaux' : 'Medical Records',
-      desc: lang === 'fr' ? 'Historique, diagnostics et ordonnances.' : 'History, diagnoses, and prescriptions.',
+      desc: lang === 'fr' ? 'Historique complet des consultations, diagnostics, prescriptions et résultats de laboratoire. Accès sécurisé 24h/24.' : 'Complete history of consultations, diagnoses, prescriptions, and lab results. Secure 24/7 access.',
       gradient: 'from-accent-600 to-accent-500',
     },
     {
       icon: HiOutlineAcademicCap, size: 'small',
       title: lang === 'fr' ? 'Santé maternelle' : 'Maternal Health',
-      desc: lang === 'fr' ? 'Suivi de grossesse et soins néonatals.' : 'Pregnancy tracking and neonatal care.',
+      desc: lang === 'fr' ? 'Suivi de grossesse avec calendrier de visites ANC, rappels de vaccination, alertes de signes de danger, et suivi postnatal.' : 'Pregnancy tracking with ANC visit schedule, vaccination reminders, danger sign alerts, and postnatal care.',
       gradient: 'from-primary-500 to-primary-700',
     },
     {
       icon: HiOutlineShieldCheck, size: 'small',
       title: lang === 'fr' ? 'Ordonnances digitales' : 'Digital Prescriptions',
-      desc: lang === 'fr' ? 'Ordonnances par SMS ou dans l\'app.' : 'Prescriptions via SMS or in-app.',
+      desc: lang === 'fr' ? 'Prescriptions électroniques envoyées par SMS, WhatsApp ou dans l\'application. Renouvellement automatique et alertes de rappel.' : 'E-prescriptions sent via SMS, WhatsApp, or in-app. Auto-renewal and refill reminders.',
       gradient: 'from-primary-600 to-accent-600',
+    },
+    {
+      icon: HiOutlineExclamationCircle, size: 'small',
+      title: lang === 'fr' ? 'SOS Urgence' : 'Emergency SOS',
+      desc: lang === 'fr' ? 'Bouton d\'urgence avec géolocalisation GPS. Envoi automatique aux contacts d\'urgence et à la clinique la plus proche.' : 'Panic button with GPS geolocation. Auto-sends to emergency contacts and nearest clinic.',
+      gradient: 'from-red-500 to-red-700',
+    },
+    {
+      icon: HiOutlineHeart, size: 'small',
+      title: lang === 'fr' ? 'Registre des donneurs' : 'Blood Donor Registry',
+      desc: lang === 'fr' ? 'Inscription des donneurs par groupe sanguin et région. Recherche rapide pour les besoins urgents de transfusion.' : 'Donor registration by blood type and region. Quick search for urgent transfusion needs.',
+      gradient: 'from-red-600 to-pink-600',
+    },
+    {
+      icon: HiOutlineChatAlt2, size: 'small',
+      title: lang === 'fr' ? 'Forum communautaire' : 'Community Forum',
+      desc: lang === 'fr' ? 'Questions-réponses entre patients et professionnels de santé. Filtrage par thème : paludisme, COVID, grossesse, nutrition, etc.' : 'Q&A between patients and health pros. Filter by topic: malaria, COVID, pregnancy, nutrition, etc.',
+      gradient: 'from-primary-500 to-primary-600',
+    },
+    {
+      icon: HiOutlineUsers, size: 'small',
+      title: lang === 'fr' ? 'Compte familial' : 'Family Account',
+      desc: lang === 'fr' ? 'Gérez la santé de toute votre famille depuis un seul compte. Profils enfants, personnes âgées, contacts d\'urgence.' : 'Manage your whole family\'s health from one account. Child profiles, elderly, emergency contacts.',
+      gradient: 'from-accent-500 to-accent-600',
+    },
+    {
+      icon: HiOutlineChartBar, size: 'small',
+      title: lang === 'fr' ? 'Carte épidémique' : 'Epidemic Map',
+      desc: lang === 'fr' ? 'Carte thermique en temps réel des foyers de maladies. Alertes épidémiques par région pour les autorités sanitaires.' : 'Real-time heatmap of disease outbreaks. Epidemic alerts by region for health authorities.',
+      gradient: 'from-orange-500 to-red-500',
+    },
+    {
+      icon: HiOutlineOfficeBuilding, size: 'small',
+      title: lang === 'fr' ? 'Livraison médicaments' : 'Medicine Delivery',
+      desc: lang === 'fr' ? 'Suivi de livraison des médicaments du pharmacien au patient. Statut en temps réel : préparation, transport, livré.' : 'Delivery tracking from pharmacy to patient. Real-time status: preparing, in transit, delivered.',
+      gradient: 'from-primary-600 to-primary-800',
+    },
+    {
+      icon: HiOutlineCalendar, size: 'small',
+      title: lang === 'fr' ? 'Planification ASC' : 'CHW Route Planner',
+      desc: lang === 'fr' ? 'Optimisation des tournées de visites à domicile pour les agents de santé. Itinéraire optimal et gain de temps.' : 'Optimized home visit routes for CHWs. Best route planning and time savings.',
+      gradient: 'from-green-500 to-green-700',
+    },
+    {
+      icon: HiOutlineMicrophone, size: 'small',
+      title: lang === 'fr' ? 'Tri vocal' : 'Voice Triage',
+      desc: lang === 'fr' ? 'Décrivez vos symptômes par voix. Transcription automatique et analyse d\'urgence avec orientation vers le bon service.' : 'Describe symptoms by voice. Auto-transcription and urgency analysis with right service routing.',
+      gradient: 'from-primary-500 to-primary-700',
+    },
+    {
+      icon: HiOutlineCamera, size: 'small',
+      title: lang === 'fr' ? 'Scanner code-barres' : 'Barcode Scanner',
+      desc: lang === 'fr' ? 'Scannez les codes-barres des médicaments pour une gestion instantanée des stocks. Mise à jour automatique des inventaires.' : 'Scan medication barcodes for instant stock management. Automatic inventory updates.',
+      gradient: 'from-indigo-500 to-indigo-700',
+    },
+    {
+      icon: HiOutlineCloud, size: 'small',
+      title: lang === 'fr' ? 'Mode hors-ligne' : 'Offline Mode',
+      desc: lang === 'fr' ? 'Application progressive fonctionnant sans connexion Internet. Synchronisation automatique dès la reconnexion.' : 'Progressive web app working without internet. Auto-syncs when back online.',
+      gradient: 'from-secondary-500 to-secondary-700',
     },
   ];
 
@@ -579,8 +642,8 @@ export default function Landing() {
                   </h3>
                   <p className="text-secondary-500 leading-relaxed mb-6 flex-grow">
                     {lang === 'fr'
-                      ? 'Composez le *800# depuis n\'importe quel téléphone. Pas d\'internet requis. Service disponible 24h/24, 7j/7.'
-                      : 'Dial *800# from any phone. No internet required. Service available 24/7.'}
+                      ? 'Composez le *800# depuis n\'importe quel téléphone. Pas d\'internet ni smartphone requis. Service disponible 24h/24, 7j/7 dans tout le Cameroun.'
+                      : 'Dial *800# from any phone. No internet or smartphone required. Service available 24/7 across all Cameroon.'}
                   </p>
                   <div className="glass rounded-2xl p-4 inline-flex items-center space-x-3 self-start">
                     <HiOutlineStar className="h-5 w-5 text-primary-600" />
@@ -606,8 +669,8 @@ export default function Landing() {
                   </h3>
                   <p className="text-primary-200 text-sm leading-relaxed flex-grow">
                     {lang === 'fr'
-                      ? 'Consultations vidéo avec des médecins qualifiés.'
-                      : 'Video consultations with qualified doctors.'}
+                      ? 'Consultations vidéo avec des médecins qualifiés depuis votre navigateur. Planification en ligne, rappels automatiques et suivi numérique.'
+                      : 'Video consultations with qualified doctors from your browser. Online scheduling, automatic reminders, and digital follow-up.'}
                   </p>
                   <div className="mt-4">
                     <TelemedicineIllustration className="w-full max-w-[160px] mx-auto opacity-80" animated />
@@ -628,7 +691,7 @@ export default function Landing() {
                     {lang === 'fr' ? 'Suivi ASC' : 'CHW Follow-up'}
                   </h3>
                   <p className="text-primary-100 text-xs leading-relaxed">
-                    {lang === 'fr' ? 'Visites à domicile par des agents de santé.' : 'Home visits by health workers.'}
+                    {lang === 'fr' ? 'Visites à domicile par des agents de santé communautaires. Suivi médicamenteux et éducation sanitaire.' : 'Home visits by community health workers. Medication tracking and health education.'}
                   </p>
                   <div className="mt-4">
                     <CHWIllustration className="w-20 h-20 mx-auto opacity-80" animated />
@@ -1074,7 +1137,7 @@ export default function Landing() {
       </section>
 
       {/* ===== FLOATING CONTROLS (beside AI button) ===== */}
-      <div className="fixed bottom-36 lg:bottom-24 right-4 z-50 flex flex-col space-y-2">
+      <div className="fixed bottom-36 lg:bottom-[4.5rem] right-4 z-50 flex flex-col space-y-2">
         <motion.button
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.92 }}

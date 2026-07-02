@@ -654,16 +654,16 @@ export default function AIAssistant() {
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.92 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-20 lg:bottom-6 right-4 z-50 h-13 w-13 lg:h-14 lg:w-14 rounded-2xl bg-gradient-to-br from-primary-600 to-accent-500 text-white shadow-xl shadow-primary-600/30 flex items-center justify-center hover:shadow-primary-600/50 transition-all duration-300"
+        className="fixed bottom-24 lg:bottom-6 right-4 z-50 h-11 w-11 rounded-xl bg-gradient-to-br from-primary-600 to-accent-500 text-white shadow-lg shadow-primary-600/30 flex items-center justify-center hover:shadow-primary-600/50 transition-all duration-300"
       >
         <AnimatePresence mode="wait">
           {isOpen ? (
             <motion.div key="close" initial={{ rotate: 45 }} animate={{ rotate: 0 }} exit={{ rotate: 45 }}>
-              <HiOutlineX className="h-5 w-5 lg:h-6 lg:w-6" />
+              <HiOutlineX className="h-5 w-5" />
             </motion.div>
           ) : (
             <motion.div key="chat" initial={{ rotate: -45 }} animate={{ rotate: 0 }} exit={{ rotate: -45 }}>
-              <HiOutlineChat className="h-5 w-5 lg:h-6 lg:w-6" />
+              <HiOutlineChat className="h-5 w-5" />
             </motion.div>
           )}
         </AnimatePresence>
