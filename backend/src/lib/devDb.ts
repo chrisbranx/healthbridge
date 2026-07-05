@@ -17,14 +17,32 @@ interface DevDatabase {
   clinics: any[];
   analytics_events: any[];
   notifications: any[];
+  disease_cases: any[];
+  epidemic_alerts: any[];
+  health_alerts: any[];
+  inventory_items: any[];
+  inventory_log: any[];
+  appointment_slots: any[];
+  appointments: any[];
+  medication_reminders: any[];
+  video_rooms: any[];
+  whatsapp_messages: any[];
+  insurance_enrollments: any[];
+  insurance_claims: any[];
+  chw_adherence_logs: any[];
+  family_members: any[];
+  forum_questions: any[];
+  forum_answers: any[];
+  lab_results: any[];
+  blood_donors: any[];
+  blood_requests: any[];
+  delivery_orders: any[];
+  voice_triage_sessions: any[];
+  sos_alerts: any[];
+  role_requests: any[];
 }
 
-function getData(): DevDatabase {
-  try {
-    if (fs.existsSync(DB_PATH)) {
-      return JSON.parse(fs.readFileSync(DB_PATH, 'utf-8'));
-    }
-  } catch {}
+function getDefaults(): DevDatabase {
   return {
     users: [],
     patients: [],
@@ -45,7 +63,46 @@ function getData(): DevDatabase {
     ],
     analytics_events: [],
     notifications: [],
+    disease_cases: [],
+    epidemic_alerts: [],
+    health_alerts: [],
+    inventory_items: [],
+    inventory_log: [],
+    appointment_slots: [],
+    appointments: [],
+    medication_reminders: [],
+    video_rooms: [],
+    whatsapp_messages: [],
+    insurance_enrollments: [],
+    insurance_claims: [],
+    chw_adherence_logs: [],
+    family_members: [],
+    forum_questions: [],
+    forum_answers: [],
+    lab_results: [],
+    blood_donors: [],
+    blood_requests: [],
+    delivery_orders: [],
+    voice_triage_sessions: [],
+    sos_alerts: [],
+    role_requests: [],
   };
+}
+
+function getData(): DevDatabase {
+  try {
+    if (fs.existsSync(DB_PATH)) {
+      const parsed = JSON.parse(fs.readFileSync(DB_PATH, 'utf-8'));
+      const defaults = getDefaults();
+      for (const key of Object.keys(defaults) as (keyof DevDatabase)[]) {
+        if (!(key in parsed)) {
+          (parsed as any)[key] = defaults[key];
+        }
+      }
+      return parsed;
+    }
+  } catch {}
+  return getDefaults();
 }
 
 function saveData(data: DevDatabase) {

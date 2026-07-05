@@ -83,3 +83,22 @@ export const notificationsApi = {
   markRead: (id: string) => api.patch(`/notifications/${id}/read`),
   markAllRead: () => api.patch('/notifications/read-all'),
 };
+
+export const adminFullApi = {
+  users: (params?: any) => api.get('/admin/users', { params }),
+  user: (id: string) => api.get(`/admin/users/${id}`),
+  updateUser: (id: string, data: any) => api.patch(`/admin/users/${id}`, data),
+  updateUserRole: (id: string, role: string) => api.patch(`/admin/users/${id}/role`, { role }),
+  toggleUserStatus: (id: string, is_active: boolean) => api.patch(`/admin/users/${id}/status`, { is_active }),
+  deleteUser: (id: string) => api.delete(`/admin/users/${id}`),
+  activity: () => api.get('/admin/activity'),
+  system: () => api.get('/admin/system'),
+  clinics: () => api.get('/admin/clinics'),
+  createClinic: (data: any) => api.post('/admin/clinics', data),
+  regions: () => api.get('/admin/regions'),
+  stats: () => api.get('/admin/stats'),
+  seed: () => api.post('/seed/all'),
+  roleRequests: (params?: any) => api.get('/admin/role-requests', { params }),
+  approveRoleRequest: (id: string, notes?: string) => api.post(`/admin/role-requests/${id}/approve`, { admin_notes: notes }),
+  rejectRoleRequest: (id: string, reason: string) => api.post(`/admin/role-requests/${id}/reject`, { reason }),
+};

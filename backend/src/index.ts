@@ -33,6 +33,7 @@ import { bloodDonorRouter } from './routes/bloodDonor';
 import { deliveryRouter } from './routes/delivery';
 import { epidemicRouter } from './routes/epidemic';
 import { voiceTriageRouter } from './routes/voiceTriage';
+import { seedRouter } from './routes/seed';
 import { initSocketIO } from './services/socket';
 
 if (process.env.NODE_ENV !== 'production') {
@@ -84,6 +85,7 @@ app.use('/api/blood-donors', bloodDonorRouter);
 app.use('/api/delivery', deliveryRouter);
 app.use('/api/epidemic', epidemicRouter);
 app.use('/api/voice-triage', voiceTriageRouter);
+app.use('/api/seed', seedRouter);
 
 app.use(errorHandler);
 

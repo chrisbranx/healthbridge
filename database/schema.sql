@@ -412,6 +412,30 @@ CREATE TABLE IF NOT EXISTS notifications (
 CREATE INDEX IF NOT EXISTS idx_notifications_user ON notifications(user_id);
 CREATE INDEX IF NOT EXISTS idx_notifications_read ON notifications(is_read);
 
+-- ========== ROLE REQUESTS (Doctor/CHW approval workflow) ==========
+CREATE TABLE IF NOT EXISTS role_requests (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  phone TEXT NOT NULL,
+  password_hash TEXT NOT NULL,
+  name TEXT NOT NULL,
+  role user_role NOT NULL,
+  email TEXT,
+  language language_preference NOT NULL DEFAULT 'en',
+  region TEXT,
+  qualifications TEXT,
+  license_number TEXT,
+  experience_years INT,
+  specialization TEXT,
+  status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'rejected')),
+  admin_notes TEXT,
+  reviewed_by UUID REFERENCES users(id),
+  reviewed_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_role_requests_status ON role_requests(status);
+
 -- ========== SEED DATA ==========
 INSERT INTO clinics (name, region, district, phone) VALUES
   ('Yaounde Central Hospital', 'Centre', 'Yaounde', '+237690000001'),
@@ -419,3 +443,8 @@ INSERT INTO clinics (name, region, district, phone) VALUES
   ('Garoua Regional Hospital', 'North', 'Garoua', '+237690000003'),
   ('Maroua District Hospital', 'Far North', 'Maroua', '+237690000004'),
   ('Ngaoundere Protestant Hospital', 'Adamawa', 'Ngaoundere', '+237690000005');
+
+-- Seed default admin (password: Admin@2026Secure!)
+INSERT INTO users (phone, password_hash, name, role, language, region, is_active, email)
+SELECT '+237999999999', '$2a$12$KpqMFixuA1oNGPmV6FxkyO1LlnfTKw5uOPq/D94ZePiAyNubCTS3m', 'System Administrator', 'admin', 'en', 'Centre', true, 'admin@healthbridge.cm'
+WHERE NOT EXISTS (SELECT 1 FROM users WHERE phone = '+237999999999');

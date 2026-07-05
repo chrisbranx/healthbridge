@@ -40,6 +40,8 @@ import AdminDashboard from './pages/admin/Dashboard';
 import AdminUsers from './pages/admin/Users';
 import AdminClinics from './pages/admin/Clinics';
 import AdminAnalytics from './pages/admin/Analytics';
+import AdminActivityLogs from './pages/admin/ActivityLogs';
+import AdminSystemSettings from './pages/admin/SystemSettings';
 import Landing from './pages/Landing';
 
 const pageVariants = {
@@ -129,8 +131,9 @@ function AppRoutes() {
         <Route path="/admin/users" element={<ProtectedRoute allowedRoles={['admin']}><Layout><AdminUsers /></Layout></ProtectedRoute>} />
         <Route path="/admin/clinics" element={<ProtectedRoute allowedRoles={['admin']}><Layout><AdminClinics /></Layout></ProtectedRoute>} />
         <Route path="/admin/analytics" element={<ProtectedRoute allowedRoles={['admin']}><Layout><AdminAnalytics /></Layout></ProtectedRoute>} />
+        <Route path="/admin/activity" element={<ProtectedRoute allowedRoles={['admin']}><Layout><AdminActivityLogs /></Layout></ProtectedRoute>} />
+        <Route path="/admin/settings" element={<ProtectedRoute allowedRoles={['admin']}><Layout><AdminSystemSettings /></Layout></ProtectedRoute>} />
         <Route path="/admin/help" element={<ProtectedRoute allowedRoles={['admin']}><Layout><HelpSupport /></Layout></ProtectedRoute>} />
-        <Route path="/admin/settings" element={<ProtectedRoute allowedRoles={['admin']}><Layout><SettingsPage /></Layout></ProtectedRoute>} />
 
         <Route path="/sos" element={<ProtectedRoute><EmergencySOS /></ProtectedRoute>} />
         <Route path="/forum" element={<ProtectedRoute><Layout><Forum /></Layout></ProtectedRoute>} />

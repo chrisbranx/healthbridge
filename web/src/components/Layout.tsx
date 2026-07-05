@@ -13,6 +13,7 @@ import {
   HiOutlinePhone, HiOutlineCalendar, HiOutlineUsers, HiOutlineOfficeBuilding,
   HiOutlineBell, HiOutlineHeart, HiOutlineCog, HiOutlineQuestionMarkCircle,
   HiOutlineChevronRight, HiOutlineSun, HiOutlineMoon, HiOutlineUser,
+  HiOutlineClock,
 } from 'react-icons/hi';
 
 const roleConfig: Record<string, {
@@ -60,10 +61,12 @@ const roleConfig: Record<string, {
   admin: {
     name: 'Admin', color: 'from-primary-800 to-primary-700', accent: 'bg-primary-800',
     nav: [
-      { label: 'Home', path: '/admin/dashboard', icon: HiOutlineHome },
+      { label: 'Dashboard', path: '/admin/dashboard', icon: HiOutlineHome },
       { label: 'Users', path: '/admin/users', icon: HiOutlineUsers },
       { label: 'Clinics', path: '/admin/clinics', icon: HiOutlineOfficeBuilding },
       { label: 'Analytics', path: '/admin/analytics', icon: HiOutlineChartBar },
+      { label: 'Activity Logs', path: '/admin/activity', icon: HiOutlineClock },
+      { label: 'Settings', path: '/admin/settings', icon: HiOutlineCog },
     ],
   },
 };

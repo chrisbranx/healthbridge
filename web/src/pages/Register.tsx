@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
-import { HiOutlinePhone, HiOutlineMail, HiOutlineUser, HiOutlineLockClosed, HiOutlineGlobe, HiOutlineHeart, HiOutlineShieldCheck, HiOutlineEye, HiOutlineEyeOff } from 'react-icons/hi';
+import { HiOutlinePhone, HiOutlineMail, HiOutlineUser, HiOutlineLockClosed, HiOutlineGlobe, HiOutlineHeart, HiOutlineShieldCheck, HiOutlineEye, HiOutlineEyeOff, HiOutlineAcademicCap, HiOutlineBadgeCheck, HiOutlineClock } from 'react-icons/hi';
 
 export default function Register() {
   const { language } = useLanguage();
@@ -14,6 +14,8 @@ export default function Register() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showProfessionalFields, setShowProfessionalFields] = useState(false);
+  const [pendingMessage, setPendingMessage] = useState<string | null>(null);
   const [form, setForm] = useState({
     name: '',
     phone: '+237',
@@ -21,6 +23,10 @@ export default function Register() {
     password: '',
     role: 'patient' as 'patient' | 'doctor' | 'chw',
     region: '',
+    qualifications: '',
+    license_number: '',
+    experience_years: '',
+    specialization: '',
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -36,7 +42,17 @@ export default function Register() {
       };
       if (method === 'phone') payload.phone = form.phone;
       else payload.email = form.email;
-      await register(payload);
+      if (form.role !== 'patient') {
+        payload.qualifications = form.qualifications;
+        payload.license_number = form.license_number;
+        payload.experience_years = form.experience_years ? parseInt(form.experience_years) : undefined;
+        payload.specialization = form.specialization;
+      }
+      const result = await register(payload);
+      if (result?.pending) {
+        setPendingMessage(result.message || null);
+        return;
+      }
       navigate('/');
       toast.success(language === 'fr' ? 'Compte créé avec succès!' : 'Account created successfully!');
     } catch (err: any) {
@@ -45,6 +61,46 @@ export default function Register() {
       setLoading(false);
     }
   };
+
+  if (pendingMessage) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-primary-50 via-white to-white flex items-center justify-center px-4 py-8">
+        <div className="max-w-md w-full">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="card text-center space-y-6 py-12"
+          >
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: 'spring', stiffness: 200, delay: 0.1 }}
+              className="h-20 w-20 rounded-full bg-accent-100 flex items-center justify-center mx-auto"
+            >
+              <HiOutlineClock className="h-10 w-10 text-accent-600" />
+            </motion.div>
+            <h2 className="text-2xl font-bold text-secondary-900">
+              {language === 'fr' ? 'Demande reçue !' : 'Application Received!'}
+            </h2>
+            <p className="text-secondary-500 leading-relaxed">
+              {pendingMessage}
+            </p>
+            <p className="text-sm text-secondary-400">
+              {language === 'fr'
+                ? 'Vous recevrez une notification dès que votre compte sera approuvé.'
+                : 'You will be notified once your account is approved.'}
+            </p>
+            <button
+              onClick={() => navigate('/login')}
+              className="btn-primary px-8 py-3"
+            >
+              {language === 'fr' ? 'Aller à la connexion' : 'Go to Login'}
+            </button>
+          </motion.div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-primary-50 via-white to-white flex items-center justify-center px-4 py-8">
@@ -217,7 +273,10 @@ export default function Register() {
                 <div>
                   <label className="label">{language === 'fr' ? 'Je suis...' : 'I am a...'}</label>
                   <select className="input" value={form.role}
-                    onChange={(e) => setForm({ ...form, role: e.target.value as any })}>
+                    onChange={(e) => {
+                      setForm({ ...form, role: e.target.value as any });
+                      setShowProfessionalFields(e.target.value !== 'patient');
+                    }}>
                     <option value="patient">{language === 'fr' ? 'Patient' : 'Patient'}</option>
                     <option value="doctor">{language === 'fr' ? 'Médecin' : 'Doctor'}</option>
                     <option value="chw">{language === 'fr' ? 'Agent de Santé' : 'CHW'}</option>
@@ -235,6 +294,84 @@ export default function Register() {
                 </div>
               </div>
 
+              {showProfessionalFields && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  className="space-y-4 pt-2 border-t border-gray-100"
+                >
+                  <p className="text-sm font-medium text-secondary-700 flex items-center gap-2">
+                    <HiOutlineAcademicCap className="h-4 w-4 text-primary-500" />
+                    {language === 'fr' ? 'Informations professionnelles' : 'Professional Information'}
+                    <span className="text-xs text-secondary-400 font-normal">
+                      ({language === 'fr' ? 'requis pour approbation' : 'required for approval'})
+                    </span>
+                  </p>
+                  <div>
+                    <label className="label">{language === 'fr' ? 'Qualifications / Diplômes' : 'Qualifications / Degrees'}</label>
+                    <div className="relative">
+                      <HiOutlineAcademicCap className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                      <input type="text" className="input pl-10" placeholder="e.g. MD, University of Yaoundé I" value={form.qualifications}
+                        onChange={(e) => setForm({ ...form, qualifications: e.target.value })} required />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="label">{language === 'fr' ? 'Numéro de licence' : 'License Number'}</label>
+                    <div className="relative">
+                      <HiOutlineBadgeCheck className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                      <input type="text" className="input pl-10" placeholder="e.g. CM-MD-2024-xxxx" value={form.license_number}
+                        onChange={(e) => setForm({ ...form, license_number: e.target.value })} required />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="label">{language === 'fr' ? 'Années d\'expérience' : 'Years of Experience'}</label>
+                      <div className="relative">
+                        <HiOutlineClock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                        <input type="number" className="input pl-10" placeholder="0" min="0" value={form.experience_years}
+                          onChange={(e) => setForm({ ...form, experience_years: e.target.value })} required />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="label">{language === 'fr' ? 'Spécialisation' : 'Specialization'}</label>
+                      <select className="input" value={form.specialization}
+                        onChange={(e) => setForm({ ...form, specialization: e.target.value })}>
+                        <option value="">{language === 'fr' ? 'Choisir' : 'Select'}</option>
+                        {form.role === 'doctor' ? (
+                          <>
+                            <option value="General Medicine">{language === 'fr' ? 'Médecine générale' : 'General Medicine'}</option>
+                            <option value="Pediatrics">{language === 'fr' ? 'Pédiatrie' : 'Pediatrics'}</option>
+                            <option value="Gynecology">{language === 'fr' ? 'Gynécologie' : 'Gynecology'}</option>
+                            <option value="Cardiology">{language === 'fr' ? 'Cardiologie' : 'Cardiology'}</option>
+                            <option value="Internal Medicine">{language === 'fr' ? 'Médecine interne' : 'Internal Medicine'}</option>
+                            <option value="Surgery">{language === 'fr' ? 'Chirurgie' : 'Surgery'}</option>
+                            <option value="Public Health">{language === 'fr' ? 'Santé publique' : 'Public Health'}</option>
+                          </>
+                        ) : (
+                          <>
+                            <option value="Community Health">{language === 'fr' ? 'Santé communautaire' : 'Community Health'}</option>
+                            <option value="Maternal Health">{language === 'fr' ? 'Santé maternelle' : 'Maternal Health'}</option>
+                            <option value="Child Health">{language === 'fr' ? 'Santé infantile' : 'Child Health'}</option>
+                            <option value="HIV/TB Care">{language === 'fr' ? 'Soins VIH/TB' : 'HIV/TB Care'}</option>
+                            <option value="Nutrition">{language === 'fr' ? 'Nutrition' : 'Nutrition'}</option>
+                          </>
+                        )}
+                      </select>
+                    </div>
+                  </div>
+                  <div className="rounded-lg bg-accent-50 p-3 text-xs text-accent-700 leading-relaxed">
+                    <HiOutlineShieldCheck className="h-4 w-4 inline mr-1" />
+                    {form.role === 'doctor'
+                      ? (language === 'fr'
+                        ? 'Les médecins approuvés reçoivent des droits d\'administration. Ces informations seront examinées avant l\'approbation.'
+                        : 'Approved doctors receive admin privileges. This information will be reviewed before approval.')
+                      : (language === 'fr'
+                        ? 'Ces informations seront examinées par un administrateur avant l\'activation de votre compte.'
+                        : 'This information will be reviewed by an administrator before your account is activated.')}
+                  </div>
+                </motion.div>
+              )}
+
               <motion.button
                 type="submit"
                 disabled={loading}
@@ -242,7 +379,7 @@ export default function Register() {
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.99 }}
               >
-                {loading ? (language === 'fr' ? 'Création...' : 'Creating...') : (language === 'fr' ? 'Créer le Compte' : 'Create Account')}
+                {loading ? (language === 'fr' ? 'Envoi...' : 'Submitting...') : (language === 'fr' ? 'Créer le Compte' : 'Create Account')}
               </motion.button>
             </motion.form>
           )}

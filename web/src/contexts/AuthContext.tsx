@@ -19,7 +19,7 @@ interface AuthContextType {
   token: string | null;
   loading: boolean;
   login: (phone: string, password: string) => Promise<void>;
-  register: (data: RegisterData) => Promise<void>;
+  register: (data: RegisterData) => Promise<{ pending?: boolean; message?: string } | void>;
   logout: () => void;
 }
 
@@ -31,6 +31,10 @@ interface RegisterData {
   email?: string;
   language?: 'en' | 'fr';
   region?: string;
+  qualifications?: string;
+  license_number?: string;
+  experience_years?: number;
+  specialization?: string;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -72,10 +76,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   async function register(registerData: RegisterData) {
     const { data } = await api.post('/auth/register', registerData);
-    localStorage.setItem('hb_token', data.token);
-    api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
-    setToken(data.token);
-    setUser(data.user);
+    if (data.token) {
+      localStorage.setItem('hb_token', data.token);
+      api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+      setToken(data.token);
+      setUser(data.user);
+      return;
+    }
+    return { pending: true, message: data.message };
   }
 
   function logout() {
